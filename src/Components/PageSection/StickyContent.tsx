@@ -7,12 +7,13 @@ type Props = {
     index: number,
     title: string,
     subTitle: React.ReactNode,
+    btnLinks: React.ReactNode,
     entry: IntersectionObserverEntry | undefined,
     pageDown?: React.MouseEventHandler<HTMLButtonElement>,
     animate?: boolean,
 }
 
-const StickyContent = ({dataLength, index, animate, title, subTitle, pageDown, entry}: Props) => {
+const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, pageDown, entry}: Props) => {
   return (
     <>
         { !(animate === undefined ) ? 
@@ -58,25 +59,7 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, pageDown, e
                 }`,
                 }}
             >
-                <a
-                title="Custom Order"
-                className={`primary-btn-link ${
-                    animate && "fade-right-animation"
-                }`}
-                href=""
-                >
-                Custom Order
-                </a>
-                <a
-                title="Existing Inventory"
-                className={`secondary-btn-link ${
-                    animate && "fade-left-animation"
-                }`}
-                href=""
-                >
-                {" "}
-                Existing Inventory
-                </a>
+                {btnLinks}
             </div>
                 { !(pageDown === undefined) && <div className="chevron-down-container">
                 <button
@@ -143,20 +126,7 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, pageDown, e
                 }`,
             }}
             >
-            <a
-                title="Custom Order"
-                className={`primary-btn-link`}
-                href=""
-            >
-                Custom Order
-            </a>
-            <a
-                title="Existing Inventory"
-                className={`secondary-btn-link`}
-                href=""
-            >
-                Existing Inventory
-            </a>
+            {btnLinks}
             </div>
             { pageDown && <div className="chevron-down-container">
             <button
