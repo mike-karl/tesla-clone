@@ -8,6 +8,7 @@ import StickyContent from './Components/PageSection/StickyContent'
 import SubTitleLink from './Components/PageSection/SubTitleLink'
 import Navbar from './Components/Navbar'
 import Drawer from './Components/Drawer'
+import BtnLink from './Components/PageSection/BtnLink'
 
 type PageSectionData = {
   ref: React.Ref<HTMLDivElement>,
@@ -19,6 +20,7 @@ type PageSectionData = {
   onLoad?: React.ReactEventHandler<HTMLImageElement>
   title: string,
   subTitle: React.ReactNode,
+  btnLinks: React.ReactNode,
   entry: IntersectionObserverEntry | undefined 
   animate?: boolean
   pageDown?: React.MouseEventHandler<HTMLButtonElement>
@@ -67,7 +69,6 @@ function App() {
 
   useEffect(() => {
     let isDialog = window.sessionStorage.getItem("testDialog")
-    console.log("isDialog: " + isDialog)
     if (isDialog === null) {
       isDialog = "true";
     } else {
@@ -92,8 +93,6 @@ function App() {
     }
 
   useEffect(() => {
-    console.log(entry?.intersectionRatio)
-    console.log(animate)
     disableAnimation();
   }), [disableAnimation]
 
@@ -123,7 +122,6 @@ function App() {
      delay = setTimeout(() => {
       if (sliderRef?.current?.style.opacity === "0"){
         sliderRef.current.style.display = "none"
-        console.log('render');
       }
     }, 300)
     return () => clearTimeout(delay);
@@ -165,6 +163,17 @@ function App() {
     onLoad: onLoad,
     title: "Model 3",
     subTitle: <SubTitleLink href=''>Schedule a Test Drive</SubTitleLink>,
+    btnLinks: 
+    <>
+      <BtnLink 
+      btnType={'primary'} 
+      href={''} 
+      children={'Order Now'} />
+      <BtnLink 
+      btnType={'secondary'}
+      href={''} 
+      children={'Existing Inventory'} />
+    </>,
     entry: entry, 
     animate: animate,
     pageDown: pageDown,
@@ -178,6 +187,17 @@ function App() {
     alt: "Tesla model y on road with mountain background",
     title: "Model Y",
     subTitle: <SubTitleLink href=''>Schedule a Test Drive</SubTitleLink>,
+    btnLinks: 
+    <>
+      <BtnLink 
+      btnType={'primary'} 
+      href={''} 
+      children={'Order Now'} />
+      <BtnLink 
+      btnType={'secondary'}
+      href={''} 
+      children={'Existing Inventory'} />
+    </>,
     entry: entry1, 
   },
   {
@@ -189,6 +209,17 @@ function App() {
     alt: "Tesla model s on road with mountain background",
     title: "Model S",
     subTitle: <SubTitleLink href=''>Schedule a Test Drive</SubTitleLink>,
+    btnLinks: 
+    <>
+      <BtnLink 
+      btnType={'primary'} 
+      href={''} 
+      children={'Order Now'} />
+      <BtnLink 
+      btnType={'secondary'}
+      href={''} 
+      children={'Existing Inventory'} />
+    </>,
     entry: entry2, 
   },
   {
@@ -200,6 +231,17 @@ function App() {
     alt: "Tesla model x on road with mountain background",
     title: "Model X",
     subTitle: <SubTitleLink href=''>Schedule a Test Drive</SubTitleLink>,
+    btnLinks: 
+    <>
+      <BtnLink 
+      btnType={'primary'} 
+      href={''} 
+      children={'Order Now'} />
+      <BtnLink 
+      btnType={'secondary'}
+      href={''} 
+      children={'Existing Inventory'} />
+    </>,
     entry: entry3, 
   },
   {
@@ -211,6 +253,17 @@ function App() {
     alt: "Tesla solar panels on roof of home",
     title: "Solar Panels",
     subTitle: "Lowest Cost Solar Panels in America",
+    btnLinks: 
+    <>
+      <BtnLink 
+      btnType={'primary'} 
+      href={''} 
+      children={'Order Now'} />
+      <BtnLink 
+      btnType={'secondary'}
+      href={''} 
+      children={'Learn More'} />
+    </>,
     entry: entry4, 
   }
   , 
@@ -223,6 +276,17 @@ function App() {
     alt: "Tesla solar roof on home",
     title: "Solar Roof",
     subTitle: "Produce Clean Energy From You Roof",
+    btnLinks: 
+    <>
+      <BtnLink 
+      btnType={'primary'} 
+      href={''} 
+      children={'Order Now'} />
+      <BtnLink 
+      btnType={'secondary'}
+      href={''} 
+      children={'Learn More'} />
+    </>,
     entry: entry5, 
   },
   {
@@ -234,6 +298,13 @@ function App() {
     alt: "tesla accessory",
     title: "Accessories",
     subTitle: "",
+    btnLinks: 
+    <>
+      <BtnLink 
+      btnType={'primary'} 
+      href={''} 
+      children={'Shop Now'} />
+    </>,
     entry: entry6, 
   },
 ]
@@ -285,6 +356,7 @@ let dataLength = pageSectionData.length;
               index={index}
               title={data.title}
               subTitle={data.subTitle}
+              btnLinks={data.btnLinks}
               entry={data.entry} 
               animate={data.animate} 
               pageDown={data.pageDown} />
