@@ -2,12 +2,13 @@ import React from 'react'
 
 type Props = {
     btnType: "primary" | "secondary",
+    className?: string
     title?: string
     href: string,
     children: string
 }
 
-const BtnLink = ({btnType, title, href, children}: Props) => {
+const BtnLink = ({btnType, className, title, href, children}: Props) => {
     if (title === null) {
         title = children
     }
@@ -15,7 +16,7 @@ const BtnLink = ({btnType, title, href, children}: Props) => {
     btnType === 'primary' ?
     <a
     title={title}
-    className={`primary-btn-link`}
+    className={`primary-btn-link ${className}`}
     href={href}
 >
     {children}
@@ -23,7 +24,7 @@ const BtnLink = ({btnType, title, href, children}: Props) => {
 : btnType === 'secondary' ?
 <a
     title={title}
-    className={`secondary-btn-link`}
+    className={`secondary-btn-link ${className}`}
     href={href}
 >
     {children}

@@ -167,10 +167,12 @@ function App() {
     <>
       <BtnLink 
       btnType={'primary'} 
+      className={`${animate && "fade-right-animation"}`}
       href={''} 
       children={'Order Now'} />
       <BtnLink 
       btnType={'secondary'}
+      className={`${animate && "fade-left-animation"}`}
       href={''} 
       children={'Existing Inventory'} />
     </>,
