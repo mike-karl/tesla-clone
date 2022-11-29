@@ -88,7 +88,7 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
         className="sticky-container"
         id={index === 0 ? "start" : index === 6 ? "end" : ""}
         style={{
-            zIndex: `calc(((2.5 * ${entry?.intersectionRatio}) - 1.5) * 100)`,
+            zIndex: `calc(((2.5 * ${entry?.intersectionRatio}) - 1.5))`,
             display: `${
             entry?.intersectionRatio && entry?.intersectionRatio < 0.1
                 ? "none"
