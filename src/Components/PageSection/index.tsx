@@ -1,5 +1,4 @@
 import React from 'react'
-import SectionImage from './SectionImage'
 
 type Props = {
     ref: React.Ref<HTMLDivElement>,
