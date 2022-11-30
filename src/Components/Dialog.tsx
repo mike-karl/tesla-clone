@@ -12,9 +12,11 @@ const Dialog = ({isOpen, children, toggleDialog}: Props) => {
     isOpen ?
     <dialog>
       <div className="dialog-box">
-        <button className="x-icon-container" onClick={toggleDialog}>
-          <VscClose className='x-icon'/>
-        </button>
+        <span className="x-icon-container">
+          <button className="" onClick={toggleDialog}>
+            <VscClose className='x-icon'/>
+          </button>
+        </span>
         {children}
       </div>
     </dialog>

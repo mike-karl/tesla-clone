@@ -22,7 +22,7 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
             className="sticky-container"
             id={index === 0 ? "start" : index === 6 ? "end" : ""}
             style={{
-            zIndex: `calc(((2.5 * ${entry?.intersectionRatio}) - 1.5))`,
+            zIndex: `${entry?.intersectionRatio}`,
             display: `${
                 entry?.intersectionRatio && entry?.intersectionRatio < 0.1
                 ? "none"
@@ -89,7 +89,7 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
         className="sticky-container"
         id={index === 0 ? "start" : index === 6 ? "end" : ""}
         style={{
-            zIndex: `calc(((2.5 * ${entry?.intersectionRatio}) - 1.5))`,
+            zIndex: `${entry?.intersectionRatio}`,
             display: `${
             entry?.intersectionRatio && entry?.intersectionRatio < 0.1
                 ? "none"
