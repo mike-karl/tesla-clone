@@ -9,6 +9,7 @@ import SubTitleLink from './Components/PageSection/SubTitleLink'
 import Navbar from './Components/Navbar'
 import Drawer from './Components/Drawer'
 import BtnLink from './Components/PageSection/BtnLink'
+import Footer from './Components/Footer'
 
 type PageSectionData = {
   ref: React.Ref<HTMLDivElement>,
@@ -17,13 +18,14 @@ type PageSectionData = {
   srcSetMD: string,
   srcSetMDP: string, 
   alt: string,
-  onLoad?: React.ReactEventHandler<HTMLImageElement>
+  onLoad?: React.ReactEventHandler<HTMLImageElement>,
   title: string,
   subTitle: React.ReactNode,
   btnLinks: React.ReactNode,
-  entry: IntersectionObserverEntry | undefined 
-  animate?: boolean
-  pageDown?: React.MouseEventHandler<HTMLButtonElement>
+  entry: IntersectionObserverEntry | undefined,
+  entryFooter?: IntersectionObserverEntry | undefined,
+  animate?: boolean,
+  pageDown?: React.MouseEventHandler<HTMLButtonElement>,
 }
 
 function App() {
@@ -32,6 +34,12 @@ function App() {
   const [animate, setAnimate] = useState<boolean>(true)
   const [dialog, setDialog] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
+  const [width, setWidth] = useState<number>(window.innerWidth)
+
+  const breakpoints = {
+    small: 600,
+    med: 1200,
+  };
 
   const drawerRef = useRef<HTMLDivElement>(null)
 
@@ -66,6 +74,9 @@ function App() {
   const [ref6 , inView6, entry6 ] = useInView({
     threshold:threshold,
   })
+  const [footerRef , inViewFooter, entryFooter ] = useInView({
+    threshold: threshold,
+  })
 
   useEffect(() => {
     let isDialog = window.sessionStorage.getItem("testDialog")
@@ -78,6 +89,12 @@ function App() {
     isDialog === "true" && setDialog(true)
     
   }, []) 
+
+  useEffect(() => {
+    window.addEventListener("resize", ()=> setWidth(window.innerWidth));
+
+    return () => window.removeEventListener("resize", ()=> setWidth(window.innerWidth));
+  }, [])
 
   useEffect(() => {
     window.addEventListener("mousedown", clickOut);
@@ -138,6 +155,11 @@ function App() {
 
   const toggleDrawer = () => {
     setIsOpen( !isOpen );
+    if (showMore) {
+      let delay = setTimeout(() => {
+        setShowMore( !showMore );
+      }, 500)
+    }
   }
 
   const toggleMore = () => {
@@ -169,7 +191,7 @@ function App() {
       btnType={'primary'} 
       className={`${animate && "fade-right-animation"}`}
       href={''} 
-      children={'Order Now'} />
+      children={'Custom Order'} />
       <BtnLink 
       btnType={'secondary'}
       className={`${animate && "fade-left-animation"}`}
@@ -194,7 +216,7 @@ function App() {
       <BtnLink 
       btnType={'primary'} 
       href={''} 
-      children={'Order Now'} />
+      children={'Custom Order'} />
       <BtnLink 
       btnType={'secondary'}
       href={''} 
@@ -216,7 +238,7 @@ function App() {
       <BtnLink 
       btnType={'primary'} 
       href={''} 
-      children={'Order Now'} />
+      children={'Custom Order'} />
       <BtnLink 
       btnType={'secondary'}
       href={''} 
@@ -238,7 +260,7 @@ function App() {
       <BtnLink 
       btnType={'primary'} 
       href={''} 
-      children={'Order Now'} />
+      children={'Custom Order'} />
       <BtnLink 
       btnType={'secondary'}
       href={''} 
@@ -260,7 +282,7 @@ function App() {
       <BtnLink 
       btnType={'primary'} 
       href={''} 
-      children={'Order Now'} />
+      children={'Custom Now'} />
       <BtnLink 
       btnType={'secondary'}
       href={''} 
@@ -308,6 +330,7 @@ function App() {
       children={'Shop Now'} />
     </>,
     entry: entry6, 
+    entryFooter: entryFooter,
   },
 ]
 
@@ -324,6 +347,8 @@ let dataLength = pageSectionData.length;
       showMore={showMore} 
       toggleMore={toggleMore} 
       toggleDrawer={toggleDrawer} 
+      width={width}
+      breakpoints={breakpoints}
       />
       <div className="content-container">
         <Navbar 
@@ -361,9 +386,18 @@ let dataLength = pageSectionData.length;
               btnLinks={data.btnLinks}
               entry={data.entry} 
               animate={data.animate} 
-              pageDown={data.pageDown} />
+              pageDown={data.pageDown} 
+              entryFooter={data.entryFooter} 
+              />
           </PageSection>
         ))}
+
+        <Footer 
+        ref={footerRef} 
+        entry={entry6} 
+        width={width} 
+        breakpoints={breakpoints} 
+        />
       </div>
     </div>
   );
