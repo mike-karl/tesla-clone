@@ -9,11 +9,12 @@ type Props = {
     subTitle: React.ReactNode,
     btnLinks: React.ReactNode,
     entry: IntersectionObserverEntry | undefined,
+    entryFooter?: IntersectionObserverEntry | undefined,
     pageDown?: React.MouseEventHandler<HTMLButtonElement>,
     animate?: boolean,
 }
 
-const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, pageDown, entry}: Props) => {
+const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, pageDown, entry, entryFooter}: Props) => {
   return (
     <>
         { !(animate === undefined ) ? 
@@ -118,7 +119,7 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
             <div
             className="btn-container"
             style={{
-                opacity: `calc((2.5 * ${entry?.intersectionRatio}) - 1.5)`,
+                opacity: `${ entryFooter?.isIntersecting ? "1" :`calc((2.5 * ${entry?.intersectionRatio}) - 1.5)`}`,
                 display: `${
                 entry?.intersectionRatio && entry?.intersectionRatio > 0.1
                     ? "flex"
@@ -145,8 +146,6 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
                 <CgChevronDown className="chevron-down bounce" />
             </button>
             </div>}
-            { (index === (dataLength - 1)) ?
-            <Footer entry={entry}/> : null}
         </div>
         </div>
         :
