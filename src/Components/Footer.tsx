@@ -37,6 +37,7 @@ const Footer = React.forwardRef<HTMLDivElement, Props>(({entry, width, breakpoin
         </footer>
       ) : ( (width >= small) && (width < med) ) ? (
         <footer
+          ref={footerRef}
           style={{ opacity: `calc((2.5 * ${entry?.intersectionRatio}) - 1.5)` }}
         >
           <nav>
