@@ -36,6 +36,7 @@ function App() {
   const [dialog, setDialog] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
   const [width, setWidth] = useState<number>(window.innerWidth)
+  const [height, setHeight] = useState<number>(window.innerHeight)
   const [isMounted, setIsMounted] = useState<boolean>(true)
 
   const breakpoints = {
@@ -95,13 +96,18 @@ function App() {
   }, []) 
 
   useEffect(() => {
-    window.addEventListener("resize", ()=> setWidth(window.innerWidth));
+    window.addEventListener("resize", onResize);
 
-    return () => window.removeEventListener("resize", () => setWidth(window.innerWidth));
+    return () => window.removeEventListener("resize", onResize);
   }, [])
 
   const onLoad = () => {
     setLoaded(true);
+  }
+
+  const onResize = () => {
+    setWidth(window.innerWidth)
+    setHeight(window.innerHeight)
   }
   
   const handleMouseOver = (e: MouseEvent) => {
@@ -317,7 +323,7 @@ let dataLength = pageSectionData.length;
       width={width}
       breakpoints={breakpoints}
       />
-      <div className="content-container">
+      <div className="content-container" style={{height}}>
         <Navbar 
         sliderRef={sliderRef} 
         handleMouseOver={handleMouseOver} 
@@ -336,7 +342,7 @@ let dataLength = pageSectionData.length;
 
         { pageSectionData.map((data, index) => 
             (
-          <PageSection key={index} ref={data.ref}>
+          <PageSection key={index} ref={data.ref} >
             <SectionImage 
               src={data.src} 
               srcSetSMP={data.srcSetSMP}
