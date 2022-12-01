@@ -1,6 +1,5 @@
 import React from 'react'
 import { CgChevronDown } from 'react-icons/cg'
-import Footer from '../Footer'
 
 type Props = {
     dataLength: number,
@@ -11,18 +10,19 @@ type Props = {
     entry: IntersectionObserverEntry | undefined,
     entryFooter?: IntersectionObserverEntry | undefined,
     pageDown?: React.MouseEventHandler<HTMLButtonElement>,
-    animate?: boolean,
+    isMounted?: boolean,
+    hasTransitionedIn?: boolean,
 }
 
-const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, pageDown, entry, entryFooter}: Props) => {
+const StickyContent = ({isMounted, dataLength, index, hasTransitionedIn, title, subTitle, btnLinks, pageDown, entry, entryFooter}: Props) => {
   return (
     <>
-        { !(animate === undefined ) ? 
+        { !(hasTransitionedIn === undefined) ? 
         <div
             className="sticky-container"
-            id={index === 0 ? "start" : index === 6 ? "end" : ""}
+            id={index === 0 ? "start" : index === (dataLength - 1) ? "end" : undefined}
             style={{
-            zIndex: `${entry?.intersectionRatio}`,
+            zIndex: `calc(${entry?.intersectionRatio }* 10)`,
             display: `${
                 entry?.intersectionRatio && entry?.intersectionRatio < 0.1
                 ? "none"
@@ -30,7 +30,7 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
             }`,
             }}
         >
-            <div className="sticky" id="sticky-1">
+            <div className="sticky">
             <article
                 className="section-header"
                 style={{
@@ -42,10 +42,10 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
                 }`,
                 }}
             >
-                <h2 className={`${animate && "fade-up-animation"}`}>
+                <h2 className={`${hasTransitionedIn && "in"} ${isMounted && "visible"}`}>
                 {title}
                 </h2>
-                <p className={`${animate && "fade-up-animation-2nd"}`}>
+                <p className={`${hasTransitionedIn && "in"} ${isMounted && "visible"}`}>
                 {subTitle}
                 </p>
             </article>
@@ -64,9 +64,7 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
             </div>
                 { !(pageDown === undefined) && <div className="chevron-down-container">
                 <button
-                    className={`pointer-on-hover ${
-                    animate && "fade-down-animation"
-                    }`}
+                    className={`pointer-on-hover`}
                     onClick={pageDown}
                     style={{
                     opacity: `calc((2.5 * ${entry?.intersectionRatio}) - 1.5)`,
@@ -78,18 +76,18 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
                     }`,
                     }}
                 >
-                    <CgChevronDown className="chevron-down bounce" />
+                    <CgChevronDown className={`chevron-down bounce chevron-down-btn ${hasTransitionedIn && "in"} ${isMounted && "visible"}`} />
                 </button>
             </div>}
             </div>
         </div>
         : 
-        animate === undefined ? 
+        hasTransitionedIn === undefined ? 
         <div
         className="sticky-container"
         id={index === 0 ? "start" : index === 6 ? "end" : ""}
         style={{
-            zIndex: `${entry?.intersectionRatio}`,
+            zIndex: `calc(${entry?.intersectionRatio }* 10)`,
             display: `${
             entry?.intersectionRatio && entry?.intersectionRatio < 0.1
                 ? "none"
@@ -109,10 +107,10 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
                 }`,
             }}
             >
-            <h2>
+            <h2 className='in visible'>
                 {title}
             </h2>
-            <p>
+            <p className='in visible'>
                 {subTitle}
             </p>
             </article>
@@ -143,7 +141,7 @@ const StickyContent = ({dataLength, index, animate, title, subTitle, btnLinks, p
                 }`,
                 }}
             >
-                <CgChevronDown className="chevron-down bounce" />
+                <CgChevronDown className="chevron-down bounce in visible" />
             </button>
             </div>}
         </div>
