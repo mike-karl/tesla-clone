@@ -10,6 +10,7 @@ import Navbar from './Components/Navbar'
 import Drawer from './Components/Drawer'
 import BtnLink from './Components/PageSection/BtnLink'
 import Footer from './Components/Footer'
+import useTransitionIn from './hooks/useTransitionIn'
 
 type PageSectionData = {
   ref: React.Ref<HTMLDivElement>,
@@ -24,17 +25,18 @@ type PageSectionData = {
   btnLinks: React.ReactNode,
   entry: IntersectionObserverEntry | undefined,
   entryFooter?: IntersectionObserverEntry | undefined,
-  animate?: boolean,
+  hasTransitionedIn?: boolean,
+  isMounted?: boolean,
   pageDown?: React.MouseEventHandler<HTMLButtonElement>,
 }
 
 function App() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [showMore, setShowMore] = useState<boolean>(false)
-  const [animate, setAnimate] = useState<boolean>(true)
   const [dialog, setDialog] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
   const [width, setWidth] = useState<number>(window.innerWidth)
+  const [isMounted, setIsMounted] = useState<boolean>(true)
 
   const breakpoints = {
     small: 600,
@@ -78,6 +80,8 @@ function App() {
     threshold: threshold,
   })
 
+  const hasTransitionedIn = useTransitionIn(isMounted, 3000)
+
   useEffect(() => {
     let isDialog = window.sessionStorage.getItem("testDialog")
     if (isDialog === null) {
@@ -93,25 +97,8 @@ function App() {
   useEffect(() => {
     window.addEventListener("resize", ()=> setWidth(window.innerWidth));
 
-    return () => window.removeEventListener("resize", ()=> setWidth(window.innerWidth));
+    return () => window.removeEventListener("resize", () => setWidth(window.innerWidth));
   }, [])
-
-  useEffect(() => {
-    window.addEventListener("mousedown", clickOut);
-  })
-
-  const disableAnimation = () => {
-      if (!entry?.intersectionRatio) return;
-      if (entry?.intersectionRatio < 0.1) {
-        setAnimate(false);
-      } else {
-        return;
-      }
-    }
-
-  useEffect(() => {
-    disableAnimation();
-  }), [disableAnimation]
 
   const onLoad = () => {
     setLoaded(true);
@@ -166,179 +153,159 @@ function App() {
     setShowMore(!showMore);
   }
 
-  const clickOut = (e: any) => {
-    if (!drawerRef.current) {
-      return
-    }
-    if (!drawerRef?.current.contains(e?.target) && isOpen ) {
-      toggleDrawer();
-    }
-  }
-
-  const pageSectionData: PageSectionData[] = [{
-    ref: ref,
-    src: "/tesla-model-3.jpg",
-    srcSetSMP: "/tesla-model-3-smp.jpg",
-    srcSetMD: "/tesla-model-3-md.jpg",
-    srcSetMDP: "/tesla-model-3-mdp.jpg", 
-    alt: "Tesla model 3 on road with mountain background",
-    onLoad: onLoad,
-    title: "Model 3",
-    subTitle: <SubTitleLink href=''>Schedule a Test Drive</SubTitleLink>,
-    btnLinks: 
-    <>
-      <BtnLink 
-      btnType={'primary'} 
-      className={`${animate && "fade-right-animation"}`}
-      href={''} 
-      children={'Custom Order'} />
-      <BtnLink 
-      btnType={'secondary'}
-      className={`${animate && "fade-left-animation"}`}
-      href={''} 
-      children={'Existing Inventory'} />
-    </>,
-    entry: entry, 
-    animate: animate,
-    pageDown: pageDown,
-  },
-  {
-    ref: ref1,
-    src: "/tesla-model-y.jpg",
-    srcSetSMP: "/tesla-model-y-smp.jpg",
-    srcSetMD: "/tesla-model-y-md.jpg",
-    srcSetMDP: "/tesla-model-y-mdp.jpg", 
-    alt: "Tesla model y on road with mountain background",
-    title: "Model Y",
-    subTitle: <SubTitleLink href=''>Schedule a Test Drive</SubTitleLink>,
-    btnLinks: 
-    <>
-      <BtnLink 
-      btnType={'primary'} 
-      href={''} 
-      children={'Custom Order'} />
-      <BtnLink 
-      btnType={'secondary'}
-      href={''} 
-      children={'Existing Inventory'} />
-    </>,
-    entry: entry1, 
-  },
-  {
-    ref: ref2,
-    src: "/tesla-model-s.jpg",
-    srcSetSMP: "/tesla-model-s-smp.jpg",
-    srcSetMD: "/tesla-model-s-md.jpg",
-    srcSetMDP: "/tesla-model-s-mdp.jpg", 
-    alt: "Tesla model s on road with mountain background",
-    title: "Model S",
-    subTitle: <SubTitleLink href=''>Schedule a Test Drive</SubTitleLink>,
-    btnLinks: 
-    <>
-      <BtnLink 
-      btnType={'primary'} 
-      href={''} 
-      children={'Custom Order'} />
-      <BtnLink 
-      btnType={'secondary'}
-      href={''} 
-      children={'Existing Inventory'} />
-    </>,
-    entry: entry2, 
-  },
-  {
-    ref: ref3,
-    src: "/tesla-model-x.jpg",
-    srcSetSMP: "/tesla-model-x-smp.jpg",
-    srcSetMD: "/tesla-model-x-md.jpg",
-    srcSetMDP: "/tesla-model-x-mdp.jpg", 
-    alt: "Tesla model x on road with mountain background",
-    title: "Model X",
-    subTitle: <SubTitleLink href=''>Schedule a Test Drive</SubTitleLink>,
-    btnLinks: 
-    <>
-      <BtnLink 
-      btnType={'primary'} 
-      href={''} 
-      children={'Custom Order'} />
-      <BtnLink 
-      btnType={'secondary'}
-      href={''} 
-      children={'Existing Inventory'} />
-    </>,
-    entry: entry3, 
-  },
-  {
-    ref: ref4,
-    src: "/tesla-solar-panels.jpg",
-    srcSetSMP: "/tesla-solar-panels-smp.jpg",
-    srcSetMD: "/tesla-solar-panels-md.jpg",
-    srcSetMDP: "/tesla-solar-panels-mdp.jpg", 
-    alt: "Tesla solar panels on roof of home",
-    title: "Solar Panels",
-    subTitle: "Lowest Cost Solar Panels in America",
-    btnLinks: 
-    <>
-      <BtnLink 
-      btnType={'primary'} 
-      href={''} 
-      children={'Custom Now'} />
-      <BtnLink 
-      btnType={'secondary'}
-      href={''} 
-      children={'Learn More'} />
-    </>,
-    entry: entry4, 
-  }
-  , 
-  {
-    ref: ref5,
-    src: "/tesla-solar-roof.jpg",
-    srcSetSMP: "/tesla-solar-roof-smp.jpg",
-    srcSetMD: "/tesla-solar-roof-md.jpg",
-    srcSetMDP: "/tesla-solar-roof-mdp.jpg", 
-    alt: "Tesla solar roof on home",
-    title: "Solar Roof",
-    subTitle: "Produce Clean Energy From You Roof",
-    btnLinks: 
-    <>
-      <BtnLink 
-      btnType={'primary'} 
-      href={''} 
-      children={'Order Now'} />
-      <BtnLink 
-      btnType={'secondary'}
-      href={''} 
-      children={'Learn More'} />
-    </>,
-    entry: entry5, 
-  },
-  {
-    ref: ref6,
-    src: "/tesla-accessories.jpg",
-    srcSetSMP: "/tesla-accessories-smp.jpg",
-    srcSetMD: "/tesla-accessories-md.jpg",
-    srcSetMDP: "/tesla-accessories-mdp.jpg", 
-    alt: "tesla accessory",
-    title: "Accessories",
-    subTitle: "",
-    btnLinks: 
-    <>
-      <BtnLink 
-      btnType={'primary'} 
-      href={''} 
-      children={'Shop Now'} />
-    </>,
-    entry: entry6, 
-    entryFooter: entryFooter,
-  },
-]
+  const pageSectionData: PageSectionData[] = [
+    {
+      ref: ref,
+      src: "/tesla-model-3.jpg",
+      srcSetSMP: "/tesla-model-3-smp.jpg",
+      srcSetMD: "/tesla-model-3-md.jpg",
+      srcSetMDP: "/tesla-model-3-mdp.jpg",
+      alt: "Tesla model 3 on road with mountain background",
+      onLoad: onLoad,
+      title: "Model 3",
+      subTitle: <SubTitleLink href="">Schedule a Test Drive</SubTitleLink>,
+      btnLinks: (
+        <>
+          <BtnLink
+            btnType={"primary"}
+            className={`${hasTransitionedIn && "in"} ${isMounted && "visible"}`}
+            href={""}
+            children={"Custom Order"}
+          />
+          <BtnLink
+            btnType={"secondary"}
+            className={`${hasTransitionedIn && "in"} ${isMounted && "visible"}`}
+            href={""}
+            children={"Existing Inventory"}
+          />
+        </>
+      ),
+      entry: entry,
+      hasTransitionedIn: hasTransitionedIn,
+      isMounted: isMounted,
+      pageDown: pageDown,
+    },
+    {
+      ref: ref1,
+      src: "/tesla-model-y.jpg",
+      srcSetSMP: "/tesla-model-y-smp.jpg",
+      srcSetMD: "/tesla-model-y-md.jpg",
+      srcSetMDP: "/tesla-model-y-mdp.jpg",
+      alt: "Tesla model y on road with mountain background",
+      title: "Model Y",
+      subTitle: <SubTitleLink href="">Schedule a Test Drive</SubTitleLink>,
+      btnLinks: (
+        <>
+          <BtnLink btnType={"primary"} href={""} children={"Custom Order"} />
+          <BtnLink
+            btnType={"secondary"}
+            href={""}
+            children={"Existing Inventory"}
+          />
+        </>
+      ),
+      entry: entry1,
+    },
+    {
+      ref: ref2,
+      src: "/tesla-model-s.jpg",
+      srcSetSMP: "/tesla-model-s-smp.jpg",
+      srcSetMD: "/tesla-model-s-md.jpg",
+      srcSetMDP: "/tesla-model-s-mdp.jpg",
+      alt: "Tesla model s on road with mountain background",
+      title: "Model S",
+      subTitle: <SubTitleLink href="">Schedule a Test Drive</SubTitleLink>,
+      btnLinks: (
+        <>
+          <BtnLink btnType={"primary"} href={""} children={"Custom Order"} />
+          <BtnLink
+            btnType={"secondary"}
+            href={""}
+            children={"Existing Inventory"}
+          />
+        </>
+      ),
+      entry: entry2,
+    },
+    {
+      ref: ref3,
+      src: "/tesla-model-x.jpg",
+      srcSetSMP: "/tesla-model-x-smp.jpg",
+      srcSetMD: "/tesla-model-x-md.jpg",
+      srcSetMDP: "/tesla-model-x-mdp.jpg",
+      alt: "Tesla model x on road with mountain background",
+      title: "Model X",
+      subTitle: <SubTitleLink href="">Schedule a Test Drive</SubTitleLink>,
+      btnLinks: (
+        <>
+          <BtnLink btnType={"primary"} href={""} children={"Custom Order"} />
+          <BtnLink
+            btnType={"secondary"}
+            href={""}
+            children={"Existing Inventory"}
+          />
+        </>
+      ),
+      entry: entry3,
+    },
+    {
+      ref: ref4,
+      src: "/tesla-solar-panels.jpg",
+      srcSetSMP: "/tesla-solar-panels-smp.jpg",
+      srcSetMD: "/tesla-solar-panels-md.jpg",
+      srcSetMDP: "/tesla-solar-panels-mdp.jpg",
+      alt: "Tesla solar panels on roof of home",
+      title: "Solar Panels",
+      subTitle: "Lowest Cost Solar Panels in America",
+      btnLinks: (
+        <>
+          <BtnLink btnType={"primary"} href={""} children={"Order Now"} />
+          <BtnLink btnType={"secondary"} href={""} children={"Learn More"} />
+        </>
+      ),
+      entry: entry4,
+    },
+    {
+      ref: ref5,
+      src: "/tesla-solar-roof.jpg",
+      srcSetSMP: "/tesla-solar-roof-smp.jpg",
+      srcSetMD: "/tesla-solar-roof-md.jpg",
+      srcSetMDP: "/tesla-solar-roof-mdp.jpg",
+      alt: "Tesla solar roof on home",
+      title: "Solar Roof",
+      subTitle: "Produce Clean Energy From You Roof",
+      btnLinks: (
+        <>
+          <BtnLink btnType={"primary"} href={""} children={"Order Now"} />
+          <BtnLink btnType={"secondary"} href={""} children={"Learn More"} />
+        </>
+      ),
+      entry: entry5,
+    },
+    {
+      ref: ref6,
+      src: "/tesla-accessories.jpg",
+      srcSetSMP: "/tesla-accessories-smp.jpg",
+      srcSetMD: "/tesla-accessories-md.jpg",
+      srcSetMDP: "/tesla-accessories-mdp.jpg",
+      alt: "tesla accessory",
+      title: "Accessories",
+      subTitle: "",
+      btnLinks: (
+        <>
+          <BtnLink btnType={"primary"} href={""} children={"Shop Now"} />
+        </>
+      ),
+      entry: entry6,
+      entryFooter: entryFooter,
+    },
+  ];
 
 let dataLength = pageSectionData.length;
 
   return (
     <div className="App" style={{visibility: `${!loaded ? "hidden" : "visible"}`}}>
-      <span
+      <span onClick={toggleDrawer}
         className={`glass-overlay ${isOpen ? "glass-fadeIn" : "glass-fadeOut"}`}
       ></span>
       <Drawer 
@@ -385,7 +352,8 @@ let dataLength = pageSectionData.length;
               subTitle={data.subTitle}
               btnLinks={data.btnLinks}
               entry={data.entry} 
-              animate={data.animate} 
+              hasTransitionedIn={data.hasTransitionedIn}
+              isMounted={data.isMounted}
               pageDown={data.pageDown} 
               entryFooter={data.entryFooter} 
               />
