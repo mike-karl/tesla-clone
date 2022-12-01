@@ -37,7 +37,6 @@ const Navbar = (props: Props) => {
               className="background-slider"
               ref={props.sliderRef}
               id="slider"
-              style={{}}
             ></div>
             <nav className="featured-product-nav">
               <a
