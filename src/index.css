@@ -7,35 +7,35 @@
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(GothamSSm/GothomBold.ttf);
+  src: url(assets/GothamSSm/GothomBold.ttf);
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(GothamSSm/GothomLight.ttf);
+  src: url(assets/GothamSSm/GothomLight.ttf);
   font-weight: light;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(GothamSSm/GothomLightItalic.ttf);
+  src: url(assets/GothamSSm/GothomLightItalic.ttf);
   font-weight: light;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(GothamSSm/GothomMediumItalic.ttf);
+  src: url(assets/GothamSSm/GothomMediumItalic.ttf);
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(GothamSSm/GothomBoldItalic.ttf);
+  src: url(assets/GothomBoldItalic.ttf);
   font-weight: bold;
   font-style: italic;
 }
