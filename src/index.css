@@ -1,7 +1,7 @@
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(assets/GothamSSm/GothamLightItalic.ttf);
+  src: url(assets/GothamSSm/GothamLightItalic.ttf) format('truetype');
   font-style: italic;
   font-weight: 300;
   
@@ -9,14 +9,14 @@
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(assets/GothamSSm/GothamMediumItalic.ttf) format('ttf');
+  src: url(assets/GothamSSm/GothamMediumItalic.ttf) format('truetype');
   font-style: italic;
   font-weight: normal;
 }
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(assets/GothamBoldItalic.ttf) format('ttf');
+  src: url(assets/GothamBoldItalic.ttf) format('truetype');
   font-style: italic;
   font-weight: bold;
   
@@ -24,14 +24,14 @@
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(assets/GothamSSm/GothamMedium.ttf) format('ttf');
+  src: url(assets/GothamSSm/GothamMedium.ttf) format('truetype');
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(assets/GothamSSm/GothamBold.ttf) format('ttf');
+  src: url(assets/GothamSSm/GothamBold.ttf) format('truetype');
   font-style: normal;
   font-weight: bold;
   
@@ -39,7 +39,7 @@
 
 @font-face {
   font-family: "Gotham SSm";
-  src: url(assets/GothamSSm/GothamLight.ttf) format('ttf');
+  src: url(assets/GothamSSm/GothamLight.ttf) format('truetype');
   font-style: normal;
   font-weight: 300;
 }
