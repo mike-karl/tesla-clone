@@ -211,6 +211,7 @@ header nav a {
   border: none;
   color: var(--primary-color);
   font-size: 14px;
+  overflow: hidden;
 }
 
 .main-nav button {

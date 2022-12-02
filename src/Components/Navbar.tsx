@@ -106,9 +106,7 @@ const Navbar = (props: Props) => {
                 id="menu"
                 onClick={props.toggleDrawer}
               >
-                <span>
-                  Menu
-                </span>
+                Menu
               </button>
             </nav>
           </span>
