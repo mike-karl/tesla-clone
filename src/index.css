@@ -1,5 +1,47 @@
+@font-face {
+  font-family: "Gotham SSm";
+  src: url(GothamSSm/GothamMedium.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gotham SSm";
+  src: url(GothamSSm/GothomBold.ttf);
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gotham SSm";
+  src: url(GothamSSm/GothomLight.ttf);
+  font-weight: light;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gotham SSm";
+  src: url(GothamSSm/GothomLightItalic.ttf);
+  font-weight: light;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Gotham SSm";
+  src: url(GothamSSm/GothomMediumItalic.ttf);
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Gotham SSm";
+  src: url(GothamSSm/GothomBoldItalic.ttf);
+  font-weight: bold;
+  font-style: italic;
+}
+
 :root {
-  font-family: -apple-system , BlinkMacSystemFont,"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;                           
+  font-family: "Gotham SSm", -apple-system , BlinkMacSystemFont,"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;                           
   
   font-size: 16px;
   line-height: 24px;
