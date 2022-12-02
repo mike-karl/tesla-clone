@@ -12,9 +12,10 @@ type Props = {
     pageDown?: React.MouseEventHandler<HTMLButtonElement>,
     isMounted?: boolean,
     hasTransitionedIn?: boolean,
+    height: number,
 }
 
-const StickyContent = ({isMounted, dataLength, index, hasTransitionedIn, title, subTitle, btnLinks, pageDown, entry, entryFooter}: Props) => {
+const StickyContent = ({isMounted, dataLength, index, hasTransitionedIn, title, subTitle, btnLinks, pageDown, entry, entryFooter, height}: Props) => {
   return (
     <>
         { !(hasTransitionedIn === undefined) ? 
@@ -30,7 +31,7 @@ const StickyContent = ({isMounted, dataLength, index, hasTransitionedIn, title, 
             }`,
             }}
         >
-            <div className="sticky">
+            <div className="sticky" style={{height}} >
             <article
                 className="section-header"
                 style={{
@@ -95,7 +96,7 @@ const StickyContent = ({isMounted, dataLength, index, hasTransitionedIn, title, 
             }`,
         }}
         >
-        <div className="sticky" >
+        <div className="sticky" style={{height}} >
             <article
             className="section-header"
             style={{

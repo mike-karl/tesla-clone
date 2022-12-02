@@ -370,6 +370,7 @@ let dataLength = pageSectionData.length;
               isMounted={data.isMounted}
               pageDown={data.pageDown} 
               entryFooter={data.entryFooter} 
+              height={data.height}
               />
           </PageSection>
         ))}
