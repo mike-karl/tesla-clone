@@ -697,10 +697,6 @@ footer > nav > ul {
     padding: 0px 24px;
   }
 
-  .featured-product-nav {
-    display:none;
-  }
-
   .header-navs {
     width: 75%;
   }
@@ -715,30 +711,14 @@ footer > nav > ul {
     font-size: 14px;
   }
 
-  #shop {
-    display: none;
-  }
-
-  #account {
-    display: none;
-  }
-
-  #menu::before {
-    content: "";
-    display:block;
-    position: absolute;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100%;
-    z-index: -10;
+  #menu {
     background-color: #171a2011;
     backdrop-filter: blur(3px);
     border-radius: 3px;
     transition: all 300ms ease-in-out;
   }
 
-  #menu:hover::before {
+  #menu:hover {
     background-color: #171a201a;
   }
 

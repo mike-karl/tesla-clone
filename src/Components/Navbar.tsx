@@ -5,10 +5,13 @@ type Props = {
     handleMouseLeave: MouseEventHandler<HTMLSpanElement>,
     sliderRef: React.Ref<HTMLDivElement>,
     toggleDrawer: MouseEventHandler<HTMLButtonElement>,
+    width: number,
+    breakpoints: {small: number, med: number},
 
 }
 
 const Navbar = (props: Props) => {
+  const { small, med } = props.breakpoints
   return (
     <header>
           <span className="logo-container">
@@ -32,7 +35,8 @@ const Navbar = (props: Props) => {
           <span
             className={`header-navs nav-animation`}
             onMouseLeave={props.handleMouseLeave}
-          >
+          > { props.width > med ?
+            <>
             <div
               className="background-slider"
               ref={props.sliderRef}
@@ -109,7 +113,24 @@ const Navbar = (props: Props) => {
                 Menu
               </button>
             </nav>
+            </>
+            :
+            <>
+            <nav className="main-nav">
+              <button
+                title="Menu"
+                onMouseOver={props.handleMouseOver}
+                id="menu"
+                onClick={props.toggleDrawer}
+              >
+                Menu
+              </button>
+            </nav>
+            </>
+          }
           </span>
+          
+            
         </header>
   )
 }

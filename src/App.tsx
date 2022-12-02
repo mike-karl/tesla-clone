@@ -337,6 +337,8 @@ let dataLength = pageSectionData.length;
         handleMouseOver={handleMouseOver} 
         handleMouseLeave={handleMouseLeave} 
         toggleDrawer={toggleDrawer} 
+        width={width}
+        breakpoints={breakpoints}
         />
        
         <Dialog isOpen={dialog} toggleDialog={toggleDialog}>
