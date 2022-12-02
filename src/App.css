@@ -141,23 +141,13 @@ header {
 
 header nav a {
   display: flex;
+  justify-content: center;
   align-items: center;
   position: relative;
   padding: 0 16px ;
   width: fit-content;
   height: 60%;
   white-space: nowrap;
-}
-
-header nav button {
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 0 16px ;
-  width: fit-content;
-  height: 75%;
-  white-space: nowrap;
-
 }
 
 .tesla-logo {
@@ -172,6 +162,16 @@ header nav button {
   width: 25%;
   padding-left: 32px;
   transition: padding 300ms ease-in-out;
+}
+
+.logo-icon {
+  margin: 0;
+  padding: 0;
+  height: fit-content;
+}
+
+.logo-icon a {
+  display: flex;
 }
 
 .featured-product-nav {
@@ -199,6 +199,12 @@ header nav button {
 }
 
 .main-nav button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px ;
+  width: fit-content;
+  white-space: nowrap;
   position: relative;
   height: 60%;
   background: transparent;
@@ -218,7 +224,7 @@ header nav button {
   position: fixed;
   flex-direction: column; 
   width: 310px;
-  height: 100vh;
+  height: 100%;
   background: #fff;
   left: 100vw;
   overflow-y: auto;
@@ -535,7 +541,7 @@ p.in.visible {
 .underline-animation {
   text-decoration: none;
   padding-bottom: 2px;
-  box-shadow: 0px 2px 0 -1px var(--primary-color);
+  box-shadow: 0 2px 0 -1px var(--primary-color);
   transition: all .33s cubic-bezier(0.5,0, 0, 0.75 );
   color: inherit;
   overflow: hidden;
@@ -695,7 +701,7 @@ footer > nav > ul {
     height: 100%;
     justify-content: end;
     align-items: center;
-    padding-right: 8px;
+    padding-right: 24px;
     font-size: 14px;
   }
 
