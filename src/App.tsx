@@ -28,6 +28,7 @@ type PageSectionData = {
   hasTransitionedIn?: boolean,
   isMounted?: boolean,
   pageDown?: React.MouseEventHandler<HTMLButtonElement>,
+  height: number,
 }
 
 function App() {
@@ -190,6 +191,7 @@ function App() {
       hasTransitionedIn: hasTransitionedIn,
       isMounted: isMounted,
       pageDown: pageDown,
+      height: height,
     },
     {
       ref: ref1,
@@ -211,6 +213,7 @@ function App() {
         </>
       ),
       entry: entry1,
+      height: height,
     },
     {
       ref: ref2,
@@ -232,6 +235,7 @@ function App() {
         </>
       ),
       entry: entry2,
+      height: height,
     },
     {
       ref: ref3,
@@ -253,6 +257,7 @@ function App() {
         </>
       ),
       entry: entry3,
+      height: height,
     },
     {
       ref: ref4,
@@ -270,6 +275,7 @@ function App() {
         </>
       ),
       entry: entry4,
+      height: height,
     },
     {
       ref: ref5,
@@ -287,6 +293,7 @@ function App() {
         </>
       ),
       entry: entry5,
+      height: height,
     },
     {
       ref: ref6,
@@ -304,6 +311,7 @@ function App() {
       ),
       entry: entry6,
       entryFooter: entryFooter,
+      height: height,
     },
   ];
 
@@ -342,7 +350,7 @@ let dataLength = pageSectionData.length;
 
         { pageSectionData.map((data, index) => 
             (
-          <PageSection key={index} ref={data.ref} >
+          <PageSection key={index} ref={data.ref} height={data.height}>
             <SectionImage 
               src={data.src} 
               srcSetSMP={data.srcSetSMP}
