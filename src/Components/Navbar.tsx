@@ -7,13 +7,14 @@ type Props = {
     toggleDrawer: MouseEventHandler<HTMLButtonElement>,
     width: number,
     breakpoints: {small: number, med: number},
+    className?: string,
 
 }
 
 const Navbar = (props: Props) => {
   const { small, med } = props.breakpoints
   return (
-    <header>
+    <header className={props.className}>
           <span className="logo-container">
             <h1 className="logo-icon">
               <a href="">

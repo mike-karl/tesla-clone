@@ -115,6 +115,12 @@ header {
   align-items: center;
   margin-bottom: -56px;
   top:0;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+header.in.visible {
+  opacity: 1;
 }
 
 .header-navs {

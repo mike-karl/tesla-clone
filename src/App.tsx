@@ -333,6 +333,7 @@ let dataLength = pageSectionData.length;
       />
       <div className="content-container" style={{height}}>
         <Navbar 
+        className={`${hasTransitionedIn && "in"} ${isMounted && "visible"}`}
         sliderRef={sliderRef} 
         handleMouseOver={handleMouseOver} 
         handleMouseLeave={handleMouseLeave} 
