@@ -539,8 +539,7 @@ p.in.visible {
 }
 
 .section-header p > a {
-  padding-bottom: 0;
-  
+  padding: 2px 2px;
   }
 
 .underline-animation {
